@@ -1,0 +1,2634 @@
+/*====================== Home Page Design==============================*/
+ /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f4f7f6;
+      color: #1e293b;
+      min-height: 200vh; /* স্ক্রল ইফেক্ট দেখার জন্য */
+    }
+
+    /* Navbar Container */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      z-index: 1000;
+    }
+
+    /* Scroll Effect Class (Added via JS) */
+    .navbar.scrolled {
+      padding: 12px 8%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Brand Logo */
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.03);
+    }
+
+    .logo span.dental {
+      color: #0284c7; /* Dental Blue */
+    }
+
+    .logo span.fitness {
+      color: #10b981; /* Fitness Green */
+    }
+
+    /* Navigation Links */
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links li a {
+      position: relative;
+      text-decoration: none;
+      color: #334155;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 6px 0;
+      transition: color 0.3s ease;
+    }
+
+    /* Modern Hover Underline Animation */
+    .nav-links li a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #0284c7, #10b981);
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateX(-50%);
+    }
+
+    .nav-links li a:hover {
+      color: #0284c7;
+    }
+
+    .nav-links li a:hover::before,
+    .nav-links li a.active::before {
+      width: 100%;
+    }
+
+    .nav-links li a.active {
+      color: #0284c7;
+      font-weight: 600;
+    }
+
+    /* Call to Action (CTA) Button */
+    .cta-btn {
+      padding: 10px 24px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* CTA Button Hover Effect */
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #10b981 0%, #0284c7 100%);
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.4s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .cta-btn:hover::after {
+      opacity: 1;
+    }
+
+    /* Hamburger Menu Icon (Mobile) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 26px;
+      height: 3px;
+      background-color: #0f172a;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    /* Demo Hero Section (To preview navbar) */
+    .hero-demo {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      background: radial-gradient(circle at top right, #e0f2fe, #ecfdf5, #f8fafc);
+    }
+
+    .hero-demo h1 {
+      font-size: 2.8rem;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .hero-demo p {
+      color: #64748b;
+      max-width: 550px;
+    }
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 860px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 25px 0;
+        gap: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: clip-path 0.4s ease-in-out;
+      }
+
+      .nav-links.open {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .cta-desktop {
+        display: none;
+      }
+
+      /* Hamburger to X Animation */
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+    }
+	
+
+    /* Hero Banner Section Container */
+	/* Hero Banner Section Styles */
+.hero-section {
+  position: relative;
+  padding: 135px 8% 90px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 50%, #ecfdf5 100%);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* Soft Decorative Background Blobs */
+.hero-blob {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob-blue {
+  top: -80px;
+  left: -100px;
+  background: #bae6fd;
+}
+
+.blob-green {
+  bottom: -100px;
+  right: -80px;
+  background: #a7f3d0;
+}
+
+.hero-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 50px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Interactive Mode Switcher */
+.hero-switcher {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 50px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+  margin-bottom: 24px;
+}
+
+.h-switch-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.h-switch-btn:hover {
+  color: #0f172a;
+}
+
+.h-switch-btn.active[data-mode="both"] {
+  background: linear-gradient(135deg, #0284c7, #10b981);
+  color: #ffffff;
+}
+
+.h-switch-btn.active[data-mode="dental"] {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.h-switch-btn.active[data-mode="fitness"] {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* Headline & Paragraph */
+.hero-content h1 {
+  font-size: 3.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.hero-content h1 .h-d-text {
+  color: #0284c7;
+}
+
+.hero-content h1 .h-f-text {
+  color: #10b981;
+}
+
+.hero-content p {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: 32px;
+  transition: opacity 0.3s ease;
+}
+
+/* Action Buttons */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 42px;
+}
+
+.h-btn-primary {
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.28);
+  transition: all 0.35s ease;
+}
+
+.h-btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 32px rgba(16, 185, 129, 0.38);
+}
+
+.h-btn-secondary {
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: 50px;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1.5px solid #cbd5e1;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.h-btn-secondary:hover {
+  border-color: #10b981;
+  color: #059669;
+  background: #f0fdf4;
+  gap: 12px;
+}
+
+/* Stats Counter Row */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.h-stat-item h3 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.h-stat-item p {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 0;
+}
+
+.h-stat-divider {
+  width: 1px;
+  height: 38px;
+  background: #cbd5e1;
+}
+
+/* Right Visual Showcase */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-img-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 28px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(16, 185, 129, 0.2));
+  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.12);
+}
+
+.hero-img-wrapper img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.hero-img-wrapper:hover img {
+  transform: scale(1.02);
+}
+
+/* Floating Glassmorphism Badges */
+.floating-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 12px 18px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.fc-dental {
+  top: 32px;
+  left: -35px;
+}
+
+.fc-fitness {
+  bottom: 38px;
+  right: -30px;
+  animation-delay: 2s;
+}
+
+.fc-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+
+.d-ic {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.f-ic {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.floating-card strong {
+  display: block;
+  font-size: 13.5px;
+  color: #0f172a;
+}
+
+.floating-card span {
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.floating-rating {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 50px;
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
+}
+
+.floating-rating i {
+  color: #facc15;
+}
+
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions, .hero-stats {
+    justify-content: center;
+  }
+  .fc-dental {
+    left: 10px;
+  }
+  .fc-fitness {
+    right: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 115px 5% 65px;
+  }
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-img-wrapper img {
+    height: 380px;
+  }
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .h-stat-divider {
+    display: none;
+  }
+}
+
+	
+	
+    /* Dental Care Section Styles */
+.dental-care-section {
+  padding: 95px 8%;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #1e293b;
+}
+
+.dental-container {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* Header */
+.dental-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 45px;
+}
+
+.dental-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.dental-header h2 {
+  font-size: 2.3rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.dental-header h2 span {
+  color: #0284c7;
+}
+
+.dental-header p {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Filter Tabs */
+.dental-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 45px;
+}
+
+.d-tab-btn {
+  padding: 10px 22px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.d-tab-btn:hover {
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+.d-tab-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.25);
+}
+
+/* Cards Grid */
+.dental-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.d-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Bottom Animated Line on Hover */
+.d-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  transition: width 0.35s ease;
+}
+
+.d-card:hover {
+  transform: translateY(-8px);
+  border-color: #bae6fd;
+  box-shadow: 0 20px 38px rgba(2, 132, 199, 0.12);
+}
+
+.d-card:hover::before {
+  width: 100%;
+}
+
+.d-card.hidden {
+  display: none;
+}
+
+/* Card Top (Icon & Duration) */
+.d-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.d-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: #e0f2fe;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.35s ease;
+}
+
+.d-card:hover .d-icon {
+  background: #0284c7;
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.d-duration {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 5px 12px;
+  border-radius: 50px;
+}
+
+.d-card h3 {
+  font-size: 19px;
+  color: #0f172a;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.d-card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* Card Bottom */
+.d-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.d-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.d-price span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.d-book-btn {
+  background: none;
+  border: none;
+  color: #0284c7;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.d-book-btn:hover {
+  color: #0369a1;
+  gap: 10px;
+}
+
+/* Modal Styles */
+.d-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.d-modal.show {
+  display: flex;
+}
+
+.d-modal-content {
+  background: #ffffff;
+  width: 100%;
+  max-width: 410px;
+  padding: 30px;
+  border-radius: 18px;
+  position: relative;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.25s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.d-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.d-modal-content h3 {
+  font-size: 20px;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.d-selected-info {
+  font-size: 13px;
+  color: #0284c7;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+.d-modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.d-modal-content input {
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.d-modal-content input:focus {
+  border-color: #0284c7;
+}
+
+.d-modal-content button[type="submit"] {
+  padding: 12px;
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.3s ease;
+}
+
+.d-modal-content button[type="submit"]:hover {
+  background: #0369a1;
+}
+
+@media (max-width: 600px) {
+  .dental-care-section {
+    padding: 65px 5%;
+  }
+  .dental-header h2 {
+    font-size: 1.85rem;
+  }
+}
+
+
+	
+	
+/*====================== Home Page Design==============================*/
+/* Fitness & Gym Section Styles */
+.fitness-gym-section {
+  padding: 95px 8%;
+  background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #1e293b;
+}
+
+.fitness-container {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.fitness-header {
+  text-align: center;
+  max-width: 660px;
+  margin: 0 auto 55px;
+}
+
+.fitness-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #d1fae5;
+  color: #059669;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.fitness-header h2 {
+  font-size: 2.3rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.fitness-header h2 span {
+  color: #10b981;
+}
+
+.fitness-header p {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Cards Grid */
+.fitness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+/* Individual Fitness Card */
+.f-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Top Gradient Border Reveal on Hover */
+.f-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  transition: width 0.35s ease;
+}
+
+.f-card:hover {
+  transform: translateY(-9px);
+  border-color: #a7f3d0;
+  box-shadow: 0 22px 40px rgba(16, 185, 129, 0.14);
+}
+
+.f-card:hover::before {
+  width: 100%;
+}
+
+/* Featured / Most Popular Card Highlight */
+.f-card.f-popular {
+  border: 2px solid #10b981;
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.popular-tag {
+  position: absolute;
+  top: 16px;
+  right: -32px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 36px;
+  transform: rotate(45deg);
+  letter-spacing: 0.5px;
+}
+
+/* Card Header */
+.f-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.f-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: #d1fae5;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.35s ease;
+}
+
+.f-card:hover .f-icon {
+  background: #10b981;
+  color: #ffffff;
+  transform: scale(1.08) rotate(-5deg);
+}
+
+.f-level {
+  font-size: 12px;
+  font-weight: 600;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 5px 12px;
+  border-radius: 50px;
+  border: 1px solid #a7f3d0;
+}
+
+.f-card h3 {
+  font-size: 20px;
+  color: #0f172a;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.f-card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* Feature Checklist */
+.f-features {
+  list-style: none;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.f-features li {
+  font-size: 13.5px;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.f-features li i {
+  color: #10b981;
+  font-size: 13px;
+}
+
+/* Card Footer */
+.f-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.f-price {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.f-price span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.f-join-btn {
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 50px;
+  background: #ecfdf5;
+  color: #059669;
+  font-size: 13.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.f-card:hover .f-join-btn {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+.f-join-btn:hover {
+  gap: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .fitness-gym-section {
+    padding: 65px 5%;
+  }
+  .fitness-header h2 {
+    font-size: 1.85rem;
+  }
+}
+
+
+/*====================== Home Page Design==============================*/
+/* Specialists Section Styles */
+.specialists-section {
+  padding: 95px 8%;
+  background: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+  color: #1e293b;
+}
+
+.specialists-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Header */
+.specialists-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 55px;
+}
+
+.spec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #e2e8f0;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.specialists-header h2 {
+  font-size: 2.3rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.specialists-header h2 .d-text {
+  color: #0284c7; /* Dental Blue */
+}
+
+.specialists-header h2 .f-text {
+  color: #10b981; /* Fitness Emerald */
+}
+
+.specialists-header p {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Specialists Grid */
+.specialists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  gap: 28px;
+}
+
+/* Individual Specialist Card */
+.s-card {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.s-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.1);
+}
+
+/* Hover Border Color by Specialty */
+.s-card.dental-expert:hover {
+  border-color: #38bdf8;
+}
+
+.s-card.fitness-expert:hover {
+  border-color: #34d399;
+}
+
+/* Image Container & Zoom Hover */
+.s-img-box {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+.s-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s ease;
+}
+
+.s-card:hover .s-img-box img {
+  transform: scale(1.08);
+}
+
+/* Role Pill Badge */
+.role-pill {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.dental-pill {
+  background: #0284c7;
+}
+
+.fitness-pill {
+  background: #10b981;
+}
+
+/* Slide-up Social Links Overlay */
+.s-social-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.35s ease;
+}
+
+.s-card:hover .s-social-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s-social-overlay a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.dental-expert .s-social-overlay a:hover {
+  background: #0284c7;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.fitness-expert .s-social-overlay a:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+/* Card Text Content */
+.s-info {
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.s-info h3 {
+  font-size: 19px;
+  color: #0f172a;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.s-degree {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+/* Experience & Rating Meta */
+.s-meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-bottom: 16px;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.s-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.s-meta .fa-star {
+  color: #f59e0b;
+}
+
+.dental-expert .s-meta .fa-award {
+  color: #0284c7;
+}
+
+.fitness-expert .s-meta .fa-award {
+  color: #10b981;
+}
+
+/* Action Button */
+.s-profile-btn {
+  margin-top: auto;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Button Colors by Specialty */
+.dental-expert .s-profile-btn {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.dental-expert:hover .s-profile-btn {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.fitness-expert .s-profile-btn {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.fitness-expert:hover .s-profile-btn {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.s-profile-btn:hover {
+  gap: 12px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .specialists-section {
+    padding: 65px 5%;
+  }
+  .specialists-header h2 {
+    font-size: 1.85rem;
+  }
+}
+
+
+/*====================== Home Page Design==============================*/
+
+/* Packages Section Styles */
+.packages-section {
+  padding: 95px 8%;
+  background: linear-gradient(180deg, #f8fafc 0%, #f0f9ff 50%, #ecfdf5 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #1e293b;
+}
+
+.packages-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.packages-header {
+  text-align: center;
+  max-width: 660px;
+  margin: 0 auto 60px;
+}
+
+.pkg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 14px;
+}
+
+.packages-header h2 {
+  font-size: 2.3rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.packages-header h2 .d-clr {
+  color: #0284c7;
+}
+
+.packages-header h2 .f-clr {
+  color: #10b981;
+}
+
+.packages-header p {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 30px;
+  align-items: center;
+}
+
+/* Base Package Card */
+.p-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 38px 30px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.p-card:hover {
+  transform: translateY(-12px);
+}
+
+/* Combo Featured Card Styling */
+.p-card.combo-pkg {
+  border: 2px solid transparent;
+  background: linear-gradient(#ffffff, #ffffff) padding-box,
+              linear-gradient(135deg, #0284c7, #10b981) border-box;
+  box-shadow: 0 20px 45px rgba(2, 132, 199, 0.14);
+  padding: 46px 32px;
+  z-index: 2;
+}
+
+.p-card.combo-pkg:hover {
+  transform: translateY(-14px) scale(1.02);
+  box-shadow: 0 28px 55px rgba(16, 185, 129, 0.22);
+}
+
+.best-value-ribbon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #0284c7, #10b981);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 20px;
+  border-radius: 0 0 14px 14px;
+  letter-spacing: 0.4px;
+}
+
+/* Card Top Area */
+.p-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.dental-pkg .p-category {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.fitness-pkg .p-category {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.combo-pkg .p-category {
+  background: linear-gradient(90deg, #e0f2fe, #d1fae5);
+  color: #0f172a;
+}
+
+.p-card h3 {
+  font-size: 22px;
+  color: #0f172a;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.p-desc {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+/* Price Display */
+.p-price {
+  font-size: 42px;
+  font-weight: 700;
+  color: #0f172a;
+  padding-bottom: 22px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: baseline;
+}
+
+.p-price .currency {
+  font-size: 22px;
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+.p-price .period {
+  font-size: 14px;
+  font-weight: 400;
+  color: #94a3b8;
+  margin-left: 5px;
+}
+
+/* Feature Checklist */
+.p-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 30px;
+  flex-grow: 1;
+}
+
+.p-list li {
+  font-size: 14px;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dental-pkg .p-list li i {
+  color: #0284c7;
+}
+
+.fitness-pkg .p-list li i {
+  color: #10b981;
+}
+
+.combo-pkg .p-list li i {
+  color: #0d9488;
+}
+
+.p-list li.disabled {
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.p-list li.disabled i {
+  color: #cbd5e1;
+}
+
+/* Action Buttons & Hover Effects */
+.p-btn {
+  text-decoration: none;
+  text-align: center;
+  padding: 13px 20px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Dental Button */
+.dental-pkg .p-btn {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.dental-pkg:hover .p-btn {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+}
+
+/* Fitness Button */
+.fitness-pkg .p-btn {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.fitness-pkg:hover .p-btn {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Combo Gradient Button */
+.combo-pkg .p-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.25);
+}
+
+.combo-pkg .p-btn:hover {
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.4);
+  gap: 12px;
+}
+
+.p-btn:hover {
+  gap: 12px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 960px) {
+  .p-card.combo-pkg {
+    padding: 38px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .packages-section {
+    padding: 65px 5%;
+  }
+  .packages-header h2 {
+    font-size: 1.85rem;
+  }
+}
+
+/*====================== Home Page Design==============================*/
+/* Contact Section Styles */
+.contact-section {
+  padding: 95px 8%;
+  background: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+  color: #1e293b;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 55px;
+}
+
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #e2e8f0;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.contact-header h2 {
+  font-size: 2.3rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.contact-header h2 .c-d-clr {
+  color: #0284c7;
+}
+
+.contact-header h2 .c-f-clr {
+  color: #10b981;
+}
+
+.contact-header p {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Two-Column Layout */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 35px;
+  align-items: stretch;
+}
+
+/* Left Info Panel */
+.contact-info-panel {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 35px 30px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.c-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.c-info-card:hover {
+  background: #f8fafc;
+  transform: translateX(6px);
+}
+
+.c-icon {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.c-info-card:hover .c-icon {
+  transform: scale(1.1);
+}
+
+.dental-bg {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.fitness-bg {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.combo-bg {
+  background: linear-gradient(135deg, #e0f2fe, #d1fae5);
+  color: #0f172a;
+}
+
+.c-info-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.c-info-card p {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Social Links */
+.c-socials {
+  padding-top: 18px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.c-socials span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin-right: 4px;
+}
+
+.c-socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.c-socials a:hover {
+  background: linear-gradient(135deg, #0284c7, #10b981);
+  color: #ffffff;
+  transform: translateY(-4px);
+}
+
+/* Right Form Box */
+.contact-form-box {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 38px 35px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+}
+
+.form-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+/* Department Selector Radio Pills */
+.dept-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.dept-option input {
+  display: none;
+}
+
+.dept-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 50px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dept-option input:checked + .d-pill {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 5px 15px rgba(2, 132, 199, 0.25);
+}
+
+.dept-option input:checked + .f-pill {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.25);
+}
+
+.dept-option input:checked + .c-pill {
+  background: linear-gradient(135deg, #0284c7, #10b981);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 5px 15px rgba(2, 132, 199, 0.25);
+}
+
+/* Form Inputs */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  background: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+}
+
+/* Submit Button */
+.c-submit-btn {
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.25);
+  transition: all 0.35s ease;
+}
+
+.c-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.35);
+  gap: 14px;
+}
+
+/* Success Message Box */
+.c-success-msg {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  animation: fadeSlide 0.35s ease;
+}
+
+.c-success-msg.active {
+  display: flex;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 65px 5%;
+  }
+  .contact-header h2 {
+    font-size: 1.85rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .contact-form-box {
+    padding: 26px 20px;
+  }
+}
+
+
+/*====================== Home Page Design==============================*/
+/* Main Footer Styles */
+.main-footer {
+  background: #0f172a;
+  color: #cbd5e1;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+
+/* Top Gradient Border Line */
+.footer-top-bar {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #10b981 100%);
+}
+
+.footer-container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 75px 8% 30px;
+}
+
+/* 4-Column Responsive Grid */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.1fr 1.3fr;
+  gap: 40px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Brand Logo & About */
+.footer-logo {
+  display: inline-block;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.footer-logo .f-d-logo {
+  color: #38bdf8; /* Bright Dental Blue */
+}
+
+.footer-logo .f-f-logo {
+  color: #34d399; /* Bright Fitness Emerald */
+}
+
+.footer-about {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+/* Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.35s ease;
+}
+
+.footer-socials a:hover {
+  background: linear-gradient(135deg, #0284c7, #10b981);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Column Headings */
+.footer-col h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 22px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0284c7, #10b981);
+}
+
+/* Footer Links with Slide Hover */
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links li a {
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.footer-links li a i {
+  font-size: 10px;
+  color: #10b981;
+  transition: transform 0.3s ease;
+}
+
+.footer-links li a:hover {
+  color: #ffffff;
+  transform: translateX(6px);
+}
+
+.footer-links li a:hover i {
+  color: #38bdf8;
+}
+
+/* Newsletter Form */
+.newsletter-text {
+  font-size: 13.5px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.footer-newsletter {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 5px;
+  margin-bottom: 22px;
+  transition: border-color 0.3s ease;
+}
+
+.footer-newsletter:focus-within {
+  border-color: #38bdf8;
+}
+
+.footer-newsletter input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  color: #ffffff;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.footer-newsletter input::placeholder {
+  color: #64748b;
+}
+
+.footer-newsletter button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #0284c7, #10b981);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.footer-newsletter button:hover {
+  opacity: 0.9;
+  transform: scale(1.04);
+}
+
+/* Emergency Helpline Box */
+.footer-emergency {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(2, 132, 199, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 12px 15px;
+  border-radius: 12px;
+}
+
+.footer-emergency i {
+  font-size: 20px;
+  color: #34d399;
+}
+
+.footer-emergency span {
+  display: block;
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+.footer-emergency strong {
+  font-size: 14.5px;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 13.5px;
+  color: #64748b;
+}
+
+.footer-bottom strong {
+  color: #e2e8f0;
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-legal a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: #34d399;
+}
+
+/* Responsive Design */
+@media (max-width: 980px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    padding: 55px 5% 25px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/*---     ==================== AI chat bot design =====================--*/
+/* Floating AI Chatbot Styles */
+.ai-chat-widget {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99999;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Floating Toggle Button */
+.ai-chat-toggle {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  color: #ffffff;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ai-chat-toggle:hover {
+  transform: scale(1.08) rotate(5deg);
+  box-shadow: 0 16px 36px rgba(16, 185, 129, 0.45);
+}
+
+.ai-pulse-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 13px;
+  height: 13px;
+  background: #22c55e;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+/* Chat Window Box */
+.ai-chat-window {
+  position: absolute;
+  bottom: 78px;
+  right: 0;
+  width: 370px;
+  max-width: calc(100vw - 36px);
+  height: 510px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.22);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.ai-chat-window.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Chat Header */
+.ai-chat-header {
+  background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-bot-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ai-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.ai-bot-info h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.ai-status {
+  font-size: 11.5px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.online-dot {
+  width: 7px;
+  height: 7px;
+  background: #86efac;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ai-close-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+
+.ai-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Messages Body */
+.ai-chat-body {
+  flex: 1;
+  padding: 18px;
+  overflow-y: auto;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ai-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+  animation: msgFade 0.3s ease;
+}
+
+@keyframes msgFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bot-msg {
+  align-self: flex-start;
+}
+
+.user-msg {
+  align-self: flex-end;
+}
+
+.msg-bubble {
+  padding: 11px 15px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.bot-msg .msg-bubble {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.user-msg .msg-bubble {
+  background: linear-gradient(135deg, #0284c7, #0d9488);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.msg-time {
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.user-msg .msg-time {
+  text-align: right;
+}
+
+/* Quick Chips */
+.ai-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.chip-btn {
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.chip-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+/* Typing Dots Animation */
+.ai-typing {
+  display: none;
+  padding: 8px 18px;
+  background: #f8fafc;
+  gap: 5px;
+}
+
+.ai-typing.active {
+  display: flex;
+}
+
+.ai-typing span {
+  width: 7px;
+  height: 7px;
+  background: #94a3b8;
+  border-radius: 50%;
+  animation: bounceDot 1.3s infinite ease-in-out;
+}
+
+.ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounceDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Footer Input Area */
+.ai-chat-footer {
+  padding: 12px 14px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-chat-footer input {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  border-radius: 50px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.ai-chat-footer input:focus {
+  border-color: #0284c7;
+}
+
+.ai-chat-footer button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0284c7, #10b981);
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.ai-chat-footer button:hover {
+  transform: scale(1.08);
+}
